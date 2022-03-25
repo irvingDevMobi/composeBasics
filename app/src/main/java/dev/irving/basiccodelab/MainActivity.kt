@@ -1,5 +1,6 @@
 package dev.irving.basiccodelab
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -81,7 +82,7 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello,")
-                Text(text = name)
+                Text(text = name, style = MaterialTheme.typography.h4)
             }
 
             OutlinedButton(
@@ -92,12 +93,12 @@ fun Greeting(name: String) {
         }
     }
 }
-
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     BasicCodelabTheme {
-        Greeting("Android")
+        Greetings()
     }
 }
 
