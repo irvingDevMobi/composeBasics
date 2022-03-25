@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -11,6 +12,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -58,41 +62,53 @@ fun MyAppPreview() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    val expanded = remember { mutableStateOf(false) }
-    val extraPadding by animateDpAsState(
-        if (expanded.value) 48.dp else 0.dp,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        )
-    )
-    Surface(
-        color = MaterialTheme.colors.primary,
-        modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 8.dp)
+private fun Greeting(name: String) {
+    Card(
+        backgroundColor = MaterialTheme.colors.primary,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(24.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))
-            ) {
-                Text(text = "Hello,")
-                Text(text = name, style = MaterialTheme.typography.h4)
-            }
+        CardContent(name = name)
+    }
+}
 
-            OutlinedButton(
-                onClick = { expanded.value = !expanded.value },
-            ) {
-                Text(text = if (expanded.value) "Show Less" else "Show more")
+@Composable
+private fun CardContent(name: String) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = Modifier
+            .padding(12.dp)
+            .animateContentSize()
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(12.dp)
+        ) {
+            Text(text = "Hello,")
+            Text(text = name, style = MaterialTheme.typography.h4)
+            if (expanded) {
+                Text(text = ("Discipline beats talent. ").repeat(6))
             }
+        }
+
+        IconButton(
+            onClick = { expanded = !expanded },
+        ) {
+            Icon(
+                if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                if (expanded) "Show less" else "Show more"
+            )
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    Greeting("Android")
+}
+
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
