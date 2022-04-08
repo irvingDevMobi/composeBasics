@@ -1,4 +1,4 @@
-package dev.irving.basiccodelab.ui.theme
+package dev.irving.layoutscompose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -31,7 +31,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun BasicCodelabTheme(
+fun LayoutComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
