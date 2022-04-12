@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package dev.irving.layoutscompose
 
 import android.os.Bundle
@@ -12,6 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -27,9 +31,49 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LayoutComposeTheme {
-                PhotographerCard()
+                LayoutCodeLab()
             }
         }
+    }
+}
+
+@Composable
+fun LayoutCodeLab() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Layouts CodeLab")
+                },
+                actions = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(Icons.Filled.Favorite, contentDescription = null)
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        BodyContent(modifier = Modifier
+            .padding(innerPadding)
+            .padding(8.dp))
+    }
+}
+
+@Composable
+fun BodyContent(modifier: Modifier) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(text = "Hello Devs!!")
+        Text(text = "Thanks for be a good developer!!")
+    }
+}
+
+@Preview
+@Composable
+fun LayoutCodeLabPreview() {
+    LayoutComposeTheme {
+        LayoutCodeLab()
     }
 }
 
