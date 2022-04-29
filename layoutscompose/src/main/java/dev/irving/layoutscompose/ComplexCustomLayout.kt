@@ -1,15 +1,17 @@
 package dev.irving.layoutscompose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.irving.layoutscompose.ui.theme.Chip
 import dev.irving.layoutscompose.ui.theme.LayoutComposeTheme
 import kotlin.math.max
 
@@ -78,7 +80,12 @@ val topics = listOf(
 
 @Composable
 fun BodyContentGrid(modifier: Modifier = Modifier) {
-    Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
+    Row(modifier = modifier
+        .background(color = Color.LightGray)
+        .padding(16.dp)
+        .size(200.dp)
+        .horizontalScroll(rememberScrollState())
+    ) {
         StaggeredGrid(modifier = modifier, rows = 5) {
             for (topic in topics) {
                 Chip(modifier = Modifier.padding(8.dp), text = topic)

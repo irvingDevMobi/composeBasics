@@ -1,4 +1,4 @@
-package dev.irving.layoutscompose.ui.theme
+package dev.irving.layoutscompose
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.irving.layoutscompose.ui.theme.LayoutComposeTheme
 
 @Composable
 fun Chip(modifier: Modifier = Modifier, text: String) {
